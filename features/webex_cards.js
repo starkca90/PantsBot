@@ -1,5 +1,5 @@
 const samplecards = require('../lib/cards');
-const ACData = require('adaptivecards-templating')
+import * as ACData from "adaptivecards-templating";
 
 module.exports = function (controller) {
 
