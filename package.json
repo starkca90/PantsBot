@@ -1,11 +1,11 @@
 {
   "name": "botkit-pantsbot",
   "version": "1.0.0",
-  "description": "",
+  "description": "Webex Teams Bot for checking is users are wearing pants",
   "main": "bot.js",
   "scripts": {
     "start": "node bot.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "dependencies": {
     "botbuilder-adapter-webex": "^1.0.8",
