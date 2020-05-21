@@ -5,7 +5,7 @@
   "main": "bot.js",
   "scripts": {
     "start": "node bot.js",
-    "test": "mocha"
+    "test": "echo \"Warn: no test specified\""
   },
   "dependencies": {
     "botbuilder-adapter-webex": "^1.0.8",
