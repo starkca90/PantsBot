@@ -1,4 +1,5 @@
 const samplecards = require('../lib/cards');
+const ACData = require('adaptivecards-templating')
 
 module.exports = function (controller) {
 
@@ -7,9 +8,17 @@ module.exports = function (controller) {
         console.log(message.text.toLowerCase());
         console.log(samplecards[message.text.toLowerCase()]);
 
+        var template = new ACData.Template(samplecards[message.text.toLowerCase]);
+
+        var cardPayload = template.expand({
+            $root: {
+                test: "Bob Dole"
+            }
+        });
+
         await bot.reply(message, {
             text: "cards not supported on this platform yet",
-            attachments: samplecards[message.text.toLowerCase()]
+            attachments: cardPayload
         });
     });
 
