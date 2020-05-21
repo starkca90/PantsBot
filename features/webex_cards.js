@@ -1,5 +1,5 @@
 const samplecards = require('../lib/cards');
-import * as ACData from "adaptivecards-templating";
+const ACData = require('adaptivecards-templating')
 
 module.exports = function (controller) {
 
@@ -8,7 +8,7 @@ module.exports = function (controller) {
         console.log(message.text.toLowerCase());
         console.log(samplecards[message.text.toLowerCase()]);
 
-        var template = new ACData.Template(samplecards[message.text.toLowerCase]);
+        var template = new ACData.Template(samplecards[message.text.toLowerCase].content);
 
         var cardPayload = template.expand({
             $root: {
