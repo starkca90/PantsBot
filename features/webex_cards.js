@@ -16,6 +16,8 @@ module.exports = function (controller) {
             }
         });
 
+        console.log(cardPayload);
+
         await bot.reply(message, {
             text: "cards not supported on this platform yet",
             attachments: cardPayload
