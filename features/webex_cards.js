@@ -8,9 +8,7 @@ module.exports = function (controller) {
         console.log(message.text.toLowerCase());
         console.log(samplecards[message.text.toLowerCase()]);
 
-        var temp = samplecards[message.text.toLowerCase];
-
-        var template = new ACData.Template(temp);
+        var template = new ACData.Template(samplecards[message.text.toLowerCase()]);
 
         var cardPayload = template.expand({
             $root: {
