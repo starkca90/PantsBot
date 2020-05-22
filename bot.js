@@ -5,14 +5,14 @@
 // This is the main file for the PantsBot bot.
 
 // Import Botkit's core features
-const { Botkit } = require('botkit');
-const { BotkitCMSHelper } = require('botkit-plugin-cms');
+import { Botkit } from 'botkit';
+import { BotkitCMSHelper } from 'botkit-plugin-cms';
 
 // Import a platform-specific adapter for webex.
 
-const { WebexAdapter } = require('botbuilder-adapter-webex');
+import { WebexAdapter } from 'botbuilder-adapter-webex';
 
-const { MongoDbStorage } = require('botbuilder-storage-mongodb');
+import { MongoDbStorage } from 'botbuilder-storage-mongodb';
 
 // Load process.env values from .env file
 require('dotenv').config();

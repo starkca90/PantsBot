@@ -1,15 +1,15 @@
-const samplecards = require('../lib/cards');
-const ACData = require('adaptivecards-templating');
-const MongDB = require('../lib/mongodb');
+import samplecards from '../lib/cards';
+import { Template } from 'adaptivecards-templating';
+import { sentCardInser, sentCardFind, sentCardDelete } from '../lib/mongodb';
 
-module.exports = function (controller) {
+export default function (controller) {
 
     controller.hears(async (message) => message.text && samples.includes(message.text.toLowerCase()), ['message', 'direct_message'], async (bot, message) => {
 
         console.log(message.text.toLowerCase());
         console.log(samplecards[message.text.toLowerCase()]);
 
-        var template = new ACData.Template(samplecards[message.text.toLowerCase()]);
+        var template = new Template(samplecards[message.text.toLowerCase()]);
 
         var cardPayload = template.expand({
             $root: {
@@ -49,18 +49,18 @@ module.exports = function (controller) {
             attachments: cardPayload
         });
 
-        await MongDB.sentCardInser(reply, message.personEmail, message.text.toLowerCase())
+        await sentCardInser(reply, message.personEmail, message.text.toLowerCase())
     });
 
     controller.on('attachmentActions', async (bot, message) => {
         if (message.value.card == 'testcard') {
             console.log('A Wild Testcard Action Has Appeared');
 
-            let messageId = await MongDB.sentCardFind(message.personEmail, message.value.card);
+            let messageId = await sentCardFind(message.personEmail, message.value.card);
 
             if (messageId.length != 0) {
                 await bot.deleteMessage(messageId[0].messageId);
-                MongDB.sentCardDelete(messageId[0].messageId);
+                sentCardDelete(messageId[0].messageId);
             }
         }
         // if (message.value.card == 'tickets') {
