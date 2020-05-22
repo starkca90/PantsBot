@@ -49,7 +49,7 @@ module.exports = function (controller) {
             attachments: cardPayload
         });
 
-        await MongDB.sentCardInser(reply, message.personEmail, message.text.toLowerCase())
+        MongDB.sentCardInsert(reply, message.personEmail, message.text.toLowerCase())
     });
 
     controller.on('attachmentActions', async (bot, message) => {
@@ -59,7 +59,7 @@ module.exports = function (controller) {
             let messageId = await MongDB.sentCardFind(message.personEmail, message.value.card);
 
             if (messageId.length != 0) {
-                await bot.deleteMessage(messageId[0].messageId);
+                bot.deleteMessage(messageId[0].messageId);
                 MongDB.sentCardDelete(messageId[0].messageId);
             }
         }
