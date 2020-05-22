@@ -50,6 +50,9 @@ module.exports = function (controller) {
     });
 
     controller.on('attachmentActions', async (bot, message) => {
+        if (message.value.card == 'testcard') {
+            console.log('A Wild Testcard Action Has Appeared');
+        }
         // if (message.value.card == 'tickets') {
         //     let engineer = await bot.api.people.get(message.user);
         //     await ticketLib.storeCounts(message.value.incidents, message.value.requests, engineer, bot, message);
