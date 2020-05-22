@@ -1,5 +1,6 @@
 const samplecards = require('../lib/cards');
-const ACData = require('adaptivecards-templating')
+const ACData = require('adaptivecards-templating');
+const MongDB = require('../lib/mongodb');
 
 module.exports = function (controller) {
 
@@ -43,15 +44,24 @@ module.exports = function (controller) {
 
         console.log(cardPayload);
 
-        await bot.reply(message, {
+        let reply = await bot.reply(message, {
             text: "cards not supported on this platform yet",
             attachments: cardPayload
         });
+
+        await MongDB.sentCardInser(reply, message.personEmail, message.text.toLowerCase())
     });
 
     controller.on('attachmentActions', async (bot, message) => {
         if (message.value.card == 'testcard') {
             console.log('A Wild Testcard Action Has Appeared');
+
+            let messageId = await MongDB.sentCardFind(message.personEmail, message.value.card);
+
+            if (messageId.length != 0) {
+                await bot.deleteMessage(messageId[0].messageId);
+                MongDB.sentCardDelete(messageId[0].messageId);
+            }
         }
         // if (message.value.card == 'tickets') {
         //     let engineer = await bot.api.people.get(message.user);
