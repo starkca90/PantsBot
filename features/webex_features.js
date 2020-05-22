@@ -3,9 +3,9 @@
  * Licensed under the MIT License.
  */
 
-import { BotkitConversation } from 'botkit';
+const { BotkitConversation } = require('botkit');
 
-export default function(controller) {
+module.exports = function(controller) {
 
     const NEW_ROOM_DIALOG = 'new_room_dialog';
     const dialog = new BotkitConversation(NEW_ROOM_DIALOG, controller);

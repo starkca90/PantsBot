@@ -3,7 +3,7 @@
  * Licensed under the MIT License.
  */
 
-export default function(controller) {
+module.exports = function(controller) {
 
     controller.hears('sample','message,direct_message', async(bot, message) => {
         await bot.reply(message, 'I heard a sample message.');
