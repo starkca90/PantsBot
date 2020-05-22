@@ -49,7 +49,7 @@ module.exports = function (controller) {
         });
     });
 
-    controller.on('attachmentAction', async (bot, message) => {
+    controller.on('attachmentActions', async (bot, message) => {
         // if (message.value.card == 'tickets') {
         //     let engineer = await bot.api.people.get(message.user);
         //     await ticketLib.storeCounts(message.value.incidents, message.value.requests, engineer, bot, message);

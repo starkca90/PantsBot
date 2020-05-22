@@ -32,7 +32,9 @@ const adapter = new WebexAdapter({
     
     access_token: process.env.ACCESS_TOKEN,
     public_address: process.env.PUBLIC_ADDRESS
-})    
+})   
+
+adapter.registerAdaptiveCardWebhookSubscription();
 
 
 const controller = new Botkit({
@@ -71,7 +73,9 @@ controller.ready(() => {
 
 });
 
-
+controller.ready(async function () {
+    await controller.adapter.registerAdaptiveCardWebhookSubscription('/api/messages');
+});
 
 controller.webserver.get('/', (req, res) => {
 
