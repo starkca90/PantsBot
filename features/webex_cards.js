@@ -49,7 +49,7 @@ module.exports = function (controller) {
             attachments: cardPayload
         });
 
-        MongDB.sentCardInsert(reply, message.personEmail, message.text.toLowerCase())
+        MongDB.sentCardInsert(reply.id, message.personEmail, message.text.toLowerCase())
     });
 
     controller.on('attachmentActions', async (bot, message) => {
