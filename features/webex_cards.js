@@ -5,10 +5,6 @@ const MongDB = require('../lib/mongodb');
 module.exports = function (controller) {
 
     controller.hears(async (message) => message.text && samples.includes(message.text.toLowerCase()), ['message', 'direct_message'], async (bot, message) => {
-
-        console.log(message.text.toLowerCase());
-        console.log(samplecards[message.text.toLowerCase()]);
-
         var template = new ACData.Template(samplecards[message.text.toLowerCase()]);
 
         var cardPayload = template.expand({
@@ -41,8 +37,6 @@ module.exports = function (controller) {
                 ]
             }
         });
-
-        console.log(cardPayload);
 
         let reply = await bot.reply(message, {
             text: "cards not supported on this platform yet",
