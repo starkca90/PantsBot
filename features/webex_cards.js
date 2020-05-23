@@ -1,6 +1,7 @@
 const samplecards = require('../lib/cards');
 const ACData = require('adaptivecards-templating');
 const MongDB = require('../lib/mongodb');
+const assert = require('assert');
 
 module.exports = function (controller) {
 
@@ -50,7 +51,12 @@ module.exports = function (controller) {
         if (message.value.card == 'testcard') {
             console.log('A Wild Testcard Action Has Appeared');
 
-            let messageId = await MongDB.sentCardFind(message.personEmail, message.value.card);
+            let user = await bot.api.people.get(message.personId);
+            assert(user);
+            assert(Array.isArray(user.emails));
+
+            let messageId = await MongDB.sentCardFind(user.emails[0], message.value.card);
+            
 
             if (messageId.length != 0) {
                 bot.deleteMessage(messageId[0].messageId);
