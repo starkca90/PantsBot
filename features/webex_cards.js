@@ -59,7 +59,7 @@ module.exports = function (controller) {
             
 
             if (messageId.length != 0) {
-                bot.deleteMessage(messageId[0].messageId);
+                await bot.api.messages.remove(messageId[0].messageId);
                 MongDB.sentCardDelete(messageId[0].messageId);
             }
         }
